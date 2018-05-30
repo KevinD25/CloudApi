@@ -1,0 +1,26 @@
+<input type="text" class="form-control" [(ngModel)]="Search">
+
+<div class="card">
+  <div class="card-header">{{dataResult.title | uppercase}}
+    <h1>Comics</h1>
+  </div>
+
+  <div class="card-block">
+    <table class = "col-md-12">
+      <thead>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Issue</th>
+        <th>Pages</th>
+      </thead>
+      <tbody *ngIf = "list">
+      <tr *ngFor = "let comic of list">
+      <td>{{comic.id}}</td>
+      <td>{{comic.title}}</td>
+      <td>{{comic.issueNumber}}</td>
+      <td>{{comic.pageCount}}</td>
+      </tr>  
+      </tbody>
+    </table>
+  </div>
+</div>

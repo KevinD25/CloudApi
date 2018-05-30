@@ -1,0 +1,19 @@
+<div class="card">
+
+    <!--Card image-->
+    <img class="img-fluid" src="{{list[_nr].thumbnail}}/portrait_small.{{list[_nr].extension}}" alt="Card image cap">
+    <!-- OF Kan uiteraard ook met property binding -->
+    <!-- <img class="img-fluid" [src]="imageUrl" alt="Card image cap"> -->
+    
+    <select class="form-control" [(ngModel)]="imageNr">
+      <option *ngFor="let i of images" value="{{i}}">Image {{i}}</option>
+    </select>
+    <!--Card content-->
+    <div class="card-body">
+      <!--Title-->
+      <h4 class="card-title">Comic</h4>
+      <!--Text-->
+      <p class="card-text">{{list[_nr].title}}</p>
+    </div>
+  
+  </div>

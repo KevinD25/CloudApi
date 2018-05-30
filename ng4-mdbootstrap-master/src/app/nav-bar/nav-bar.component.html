@@ -1,0 +1,29 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark red">
+  
+    <!-- Navbar brand -->
+    <logo><a class="navbar-brand" href="#">Marvel</a></logo>
+    
+    <!-- Collapsible content -->
+    <links>
+    
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+       <li class="nav-item" [routerLinkActive]="['active']">
+           <a [routerLink]="['/home']" class="nav-link waves-light" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>
+       </li>
+       <li class="nav-item" [routerLinkActive]="['active']">
+           <a [routerLink]="['/characters']" class="nav-link waves-light" mdbRippleRadius>Characters</a>
+       </li>
+       <li class="nav-item" [routerLinkActive]="['active']">
+           <a [routerLink]="['/stories']" class="nav-link waves-light" mdbRippleRadius>Stories</a>
+       </li>
+    
+    </ul>
+    <!-- Links -->
+    
+    </links>
+    <!-- Collapsible content -->
+    
+    </mdb-navbar>
+    <!--/.Navbar-->
