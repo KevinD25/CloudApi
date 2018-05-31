@@ -1,0 +1,60 @@
+<section class="wrapper">
+  <div class="container">
+    <div class="row">
+      <br>
+    </div>
+  <div class="row">
+    <div class="col-md-4">
+
+        <div *ngIf="character">
+            <div class="card">
+          
+                <div class="card-body">
+                  <!--Title-->
+                  <h4 class="card-title">Character</h4>
+                  <!--Text-->
+                  <p class="card-text">{{character.name}}</p>
+                </div>
+          
+                <img class="img-fluid" src="{{character.thumbnail.path}}/portrait_incredible.{{character.thumbnail.extension}}" alt="Card image cap" style="width:100%">
+                <br>
+                <p class="card-text">List of starred comics comes here</p>
+            </div>
+          </div>
+
+
+    </div>
+    <div class="col-md-8">
+      
+        <input type="text" class="form-control" [(ngModel)]="Search">
+
+        <div class="card">
+          <div class="card-header">
+            <h1>All Characters</h1>
+          </div>
+        
+          <div class="card-block">
+            <table class = "col-md-12">
+              <thead>
+                <th>Image</th>
+                <th>ID</th>
+                <th>Name</th>
+              </thead>
+              <tbody *ngIf = "list">
+              <tr *ngFor = "let character of list" (click)="pressCharacter(character)">
+              <td><img class="img-fluid" src="{{character.thumbnail.path}}/standard_small.{{character.thumbnail.extension}}" alt="Card image cap" style="width:70%"></td>
+              <td>{{character.id}}</td>
+              <td>{{character.name}}</td>
+              </tr>  
+              </tbody>
+            </table>
+        
+            <button (click)="changePage('-')">Previous</button>
+            <button (click)="changePage('+')">Next</button>
+          </div>
+        </div>
+
+  </div>
+  </div>
+</div>
+</section>

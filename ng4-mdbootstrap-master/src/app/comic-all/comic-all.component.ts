@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { MarvelComicsService, IComics, IComic } from '../services/marvel-comics.service';
+import { ComicListComponent } from '../comic-list/comic-list.component';
 @Component({
   selector: 'app-comic-all',
   templateUrl: './comic-all.component.html',

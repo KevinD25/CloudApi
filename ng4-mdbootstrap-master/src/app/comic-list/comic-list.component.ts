@@ -1,4 +1,4 @@
-import {Component, OnChanges, SimpleChanges, Input} from '@angular/core';
+import {Component, OnChanges, SimpleChanges, Input, HostBinding, OnInit} from '@angular/core';
 import { MarvelComicsService, IComics, IComic } from '../services/marvel-comics.service';
 import * as _ from "lodash";
 
@@ -8,16 +8,19 @@ import * as _ from "lodash";
   templateUrl: './comic-list.component.html',
   styleUrls: ['./comic-list.component.scss']
 })
-export class ComicListComponent implements OnChanges {
- @Input() comic: IComic;
+export class ComicListComponent implements OnInit {
 
   dataResults: IComic;
   imageUrl : string;
   _nr : number = 0;
   comicTitle : string;
-  //comic : IComic;
+  comic : IComic;
 
   constructor(private _mcs: MarvelComicsService) { }
+
+ngOnInit(){
+  setInterval(this.ChangeImage, 3000);
+}
 
   ngOnChanges(changes : SimpleChanges){
     for (let propName in changes) {  
@@ -29,7 +32,8 @@ export class ComicListComponent implements OnChanges {
          }
   }
 
- /* private MapResult(result: IComics): IComic {
+
+  private MapResult(result: IComics): IComic {
       var comic: IComic = {
         id: result.data.results[0].id,
         title: result.data.results[0].title,
@@ -41,7 +45,7 @@ export class ComicListComponent implements OnChanges {
       }
       this.comic = comic;
     return comic;
-  }*/
+  }
 
   ChangeImage = () =>
   {
