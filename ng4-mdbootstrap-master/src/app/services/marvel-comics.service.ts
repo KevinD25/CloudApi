@@ -11,6 +11,7 @@ export class MarvelComicsService {
   apiKey = "2fead6955ed20e05d01336b40ba08d80";
   privateKey = "cf550f5881bec012be5bcf3ad007579ebc7de100";
   link = "https://gateway.marvel.com/v1/public/comics?";
+  public currentComic : IComic;
 
 
 
@@ -191,4 +192,14 @@ export interface IComics {
   attributionHTML: string;
   data: Data;
   etag: string;
+}
+
+export interface IComic {
+  id: string,
+  title: string,
+  thumbnail: string,
+  extension: string,
+  issueNumber: string,
+  description: string,
+  pageCount: string
 }

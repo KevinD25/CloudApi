@@ -1,8 +1,8 @@
 <input type="text" class="form-control" [(ngModel)]="Search">
 
 <div class="card">
-  <div class="card-header">{{dataResult.title | uppercase}}
-    <h1>Comics</h1>
+  <div class="card-header">
+    <h1>All Comics</h1>
   </div>
 
   <div class="card-block">
@@ -14,7 +14,7 @@
         <th>Pages</th>
       </thead>
       <tbody *ngIf = "list">
-      <tr *ngFor = "let comic of list">
+      <tr *ngFor = "let comic of list" (click)="pressComic(comic)">
       <td>{{comic.id}}</td>
       <td>{{comic.title}}</td>
       <td>{{comic.issueNumber}}</td>
@@ -22,5 +22,8 @@
       </tr>  
       </tbody>
     </table>
+
+    <button (click)="changePage('-')">Previous</button>
+    <button (click)="changePage('+')">Next</button>
   </div>
 </div>

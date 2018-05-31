@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MarvelComicsService, IComics } from '../services/marvel-comics.service';
-
+import { MarvelComicsService, IComics, IComic } from '../services/marvel-comics.service';
 @Component({
   selector: 'app-comic-all',
   templateUrl: './comic-all.component.html',
@@ -11,6 +10,7 @@ export class ComicAllComponent implements OnInit {
   private _search: string = "Thor";
   dataResults: IComic[];
   list: IComic[] = [];
+  pageNumber : number = 1;
 
   constructor(private _mcs: MarvelComicsService) { }
 
@@ -20,11 +20,27 @@ export class ComicAllComponent implements OnInit {
     console.log(this.dataResults);
   }
 
+  changePage(operation: string){
+    if(operation == "+"){
+        this.pageNumber++;
+    }else if(operation == "-"){
+      if(this.pageNumber>1) this.pageNumber--;
+    }
+  }
+
+  pressComic = (comic : IComic): void => {
+    this._mcs.currentComic = comic;
+    console.log("presscomic");
+    console.log(comic);
+}
+
   private MapResult(result: IComics): IComic[] {
     for (var i = 0; i < result.data.results.length; i++) {
       var comic: IComic = {
         id: result.data.results[i].id,
         title: result.data.results[i].title,
+        thumbnail: result.data.results[i].thumbnail.path,
+        extension : result.data.results[i].thumbnail.extension,
         issueNumber: result.data.results[i].issueNumber,
         description: result.data.results[i].description,
         pageCount: result.data.results[i].pageCount
@@ -45,11 +61,4 @@ export class ComicAllComponent implements OnInit {
     this._mcs.getComicsByTitle(this._search).subscribe(result => this.dataResults = this.MapResult(result));
   }
 
-}
-interface IComic {
-  id: string,
-  title: string,
-  issueNumber: string,
-  description: string,
-  pageCount: string
 }
