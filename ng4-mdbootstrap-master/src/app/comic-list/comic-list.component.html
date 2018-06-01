@@ -1,18 +1,17 @@
-<div *ngIf="comic">
+<div *ngIf="_mcs.currentComic">
   <div class="card">
 
       <div class="card-body">
         <!--Title-->
         <h4 class="card-title">Comic</h4>
-        <button mat-raised-button color="primary" style="width:50%; margin:auto;background-color: red;border: 3px solid red; padding: 10px;" >More Info...</button>
-        <br>
         <br>
         <!--Text-->
-        <p class="card-text">{{comic.title}}</p>
+        <p class="card-text">{{_mcs.currentComic.title}}</p>
       </div>
-
-      <img class="img-fluid" src="{{comic.thumbnail}}/portrait_incredible.{{comic.extension}}" alt="Card image cap" style="width:100%">
+      <p class="card-text" style="padding-left: 5px; padding-right: 5px;">{{_mcs.currentComic.description}}</p>
       <br>
-      <p class="card-text">{{comic.description}}</p>
+      <img class="img-fluid" src="{{_mcs.currentComic.thumbnail}}/portrait_incredible.{{_mcs.currentComic.extension}}" alt="Card image cap" style="width:100%;padding-left: 5px; padding-right: 5px;">
+      
+      
   </div>
 </div>

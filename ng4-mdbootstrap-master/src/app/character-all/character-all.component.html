@@ -6,19 +6,31 @@
   <div class="row">
     <div class="col-md-4">
 
-        <div *ngIf="character">
+        <div *ngIf="currentChar">
             <div class="card">
           
                 <div class="card-body">
                   <!--Title-->
                   <h4 class="card-title">Character</h4>
                   <!--Text-->
-                  <p class="card-text">{{character.name}}</p>
+                  <h5 class="card-text">{{currentChar.name}}</h5>
                 </div>
           
-                <img class="img-fluid" src="{{character.thumbnail.path}}/portrait_incredible.{{character.thumbnail.extension}}" alt="Card image cap" style="width:100%">
+                <img class="img-fluid" src="{{currentChar.thumbnail.path}}/portrait_incredible.{{currentChar.thumbnail.extension}}" alt="Card image cap" style="width:100%; padding-left: 5px; padding-right: 5px;">
                 <br>
-                <p class="card-text">List of starred comics comes here</p>
+                <div class="card-block">
+                    <table class = "col-md-12">
+                      <tbody *ngIf = "currentChar.comics.items">
+                      <tr *ngFor = "let item of currentChar.comics.items">                 
+                      <td style="padding-left: 5px; padding-right: 5px">{{item.name}}</td>
+                      </tr>  
+                      </tbody>
+                    </table>              
+                  </div>
+
+
+
+
             </div>
           </div>
 
@@ -26,31 +38,36 @@
     </div>
     <div class="col-md-8">
       
-        <input type="text" class="form-control" [(ngModel)]="Search">
+        <!--<input type="text" class="form-control" [(ngModel)]="Search">!-->
 
         <div class="card">
           <div class="card-header">
             <h1>All Characters</h1>
+            <p>Click a character to see more details.</p>
           </div>
         
           <div class="card-block">
             <table class = "col-md-12">
               <thead>
-                <th>Image</th>
+                <th style="padding-left: 5px">Image</th>
                 <th>ID</th>
                 <th>Name</th>
               </thead>
               <tbody *ngIf = "list">
               <tr *ngFor = "let character of list" (click)="pressCharacter(character)">
-              <td><img class="img-fluid" src="{{character.thumbnail.path}}/standard_small.{{character.thumbnail.extension}}" alt="Card image cap" style="width:70%"></td>
+              <td style="padding-left: 5px"><img class="img-fluid" src="{{character.thumbnail.path}}/landscape_small.{{character.thumbnail.extension}}" alt="Card image cap" style="width:70%; max-height: 90px"></td>
               <td>{{character.id}}</td>
               <td>{{character.name}}</td>
               </tr>  
               </tbody>
             </table>
         
-            <button (click)="changePage('-')">Previous</button>
-            <button (click)="changePage('+')">Next</button>
+            <div style=" width: 100%">
+                <br>
+              <button  style=" display: inline-block;" (click)="changePage('-')">Previous</button>
+              <p style="text-align: center; display: inline-block; width: 10%">{{pageNumber}}</p>
+              <button  style=" display: inline-block;" (click)="changePage('+')">Next</button>
+            </div>
           </div>
         </div>
 

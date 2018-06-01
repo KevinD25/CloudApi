@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
-import {Md5} from 'ts-md5/dist/md5';
+import { Md5 } from 'ts-md5/dist/md5';
 import { Title } from '@angular/platform-browser';
 
 @Injectable()
@@ -11,35 +11,46 @@ export class MarvelComicsService {
   apiKey = "2fead6955ed20e05d01336b40ba08d80";
   privateKey = "cf550f5881bec012be5bcf3ad007579ebc7de100";
   link = "https://gateway.marvel.com/v1/public/comics?";
-  public currentComic : IComic;
+  public currentComic: IComic;
+  total = 1000;
 
 
 
-  getTimestamp(): number{
-    return (Date.now()/1000)
-}
+  getTimestamp(): number {
+    return (Date.now() / 1000)
+  }
 
-createHash(): string{
+  createHash(): string {
     this.ts = this.getTimestamp()
-    var prehash : string 
+    var prehash: string
     prehash = this.ts.toString() + this.privateKey + this.apiKey
     return Md5.hashStr(prehash).toString()
-}
+  }
 
   constructor(private _http: HttpClient) { }
 
-    getComics() : Observable<IComics>
-    {
-      var hash = this.createHash();
-      var req = this.link + "&ts=" + this.ts + '&apikey=' + this.apiKey + "&hash=" + hash;
-      return this._http.get<IComics>(req)
+  getComics(limit?, offset?): Observable<IComics> {
+    var request = ""
+    if (limit > 0 && limit < 100) {
+      request += 'limit=' + limit + '&'
+    }
+    if (offset > 0) {
+      if (offset < 0 || offset > (limit + this.total)) {
+        offset = 0;
+      }
+      request += 'offset=' + offset
     }
 
-    getComicsByTitle(title) : Observable<IComics>
-    {
-        var req = this.link + '?titleStartsWith='+ title + "&ts=" + this.ts + '&apikey=' + this.apiKey + "&ts=" + this.ts;
-        return this._http.get<IComics>(req)
-    }
+    var hash = this.createHash();
+    var req = this.link + request + "&ts=" + this.ts + '&apikey=' + this.apiKey + "&hash=" + hash;
+    console.log(req);
+    return this._http.get<IComics>(req)
+  }
+
+  getComicsByTitle(title): Observable<IComics> {
+    var req = this.link + '?titleStartsWith=' + title + "&ts=" + this.ts + '&apikey=' + this.apiKey + "&ts=" + this.ts;
+    return this._http.get<IComics>(req)
+  }
 }
 
 export interface TextObject {
@@ -177,10 +188,10 @@ export interface Result {
 }
 
 export interface Data {
-  offset: string;
-  limit: string;
-  total: string;
-  count: string;
+  offset: number;
+  limit: number;
+  total: number;
+  count: number;
   results: Result[];
 }
 

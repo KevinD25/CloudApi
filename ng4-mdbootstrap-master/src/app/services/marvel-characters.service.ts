@@ -13,6 +13,7 @@ export class MarvelCharactersService {
   privateKey = "cf550f5881bec012be5bcf3ad007579ebc7de100";
   link = "https://gateway.marvel.com/v1/public/characters?";
   public currentCharacter: ICharacter;
+  total = 1000;
 
   getTimestamp(): number {
     return (Date.now() / 1000)
@@ -27,9 +28,21 @@ export class MarvelCharactersService {
 
   constructor(private _http: HttpClient) { }
 
-  getCharacters(): Observable<ICharacters> {
+  getCharacters(limit?, offset?): Observable<ICharacters> {
+    var request = ""
+    if (limit > 0 && limit < 100) {
+      request += 'limit=' + limit + '&'
+    }
+    if (offset > 0) {
+      if (offset < 0 || offset > (limit + this.total)) {
+        offset = 0;
+      }
+      request += 'offset=' + offset + '&'
+    }
+
+
     var hash = this.createHash();
-    var req = this.link + "&ts=" + this.ts + '&apikey=' + this.apiKey + "&hash=" + hash;
+    var req = this.link + request + "ts=" + this.ts + '&apikey=' + this.apiKey + "&hash=" + hash;
     return this._http.get<ICharacters>(req)
   }
 
@@ -114,10 +127,10 @@ export interface Result {
 }
 
 export interface Data {
-  offset: string;
-  limit: string;
-  total: string;
-  count: string;
+  offset: number;
+  limit: number;
+  total: number;
+  count: number;
   results: Result[];
 }
 

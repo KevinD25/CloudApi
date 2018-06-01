@@ -1,29 +1,32 @@
-<input type="text" class="form-control" [(ngModel)]="Search">
+ <!--<input type="text" class="form-control" [(ngModel)]="Search">!-->
 
 <div class="card">
   <div class="card-header">
     <h1>All Comics</h1>
+    <p>Click a comic to see more details.</p>
   </div>
 
   <div class="card-block">
     <table class = "col-md-12">
       <thead>
-        <th>ID</th>
-        <th>Title</th>
+        <th style="padding-left: 5px">Title</th>
         <th>Issue</th>
         <th>Pages</th>
       </thead>
       <tbody *ngIf = "list">
       <tr *ngFor = "let comic of list" (click)="pressComic(comic)">
-      <td>{{comic.id}}</td>
-      <td>{{comic.title}}</td>
+      <td style="padding-left: 5px" >{{comic.title}}</td>
       <td>{{comic.issueNumber}}</td>
       <td>{{comic.pageCount}}</td>
       </tr>  
       </tbody>
     </table>
 
-    <button (click)="changePage('-')">Previous</button>
-    <button (click)="changePage('+')">Next</button>
+    <div style=" width: 100%">
+      <br>
+    <button  style=" display: inline-block;" (click)="changePage('-')">Previous</button>
+    <p style="text-align: center; display: inline-block; width: 10%">{{pageNumber}}</p>
+    <button  style=" display: inline-block;" (click)="changePage('+')">Next</button>
+  </div>
   </div>
 </div>
