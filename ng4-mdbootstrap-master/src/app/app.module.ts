@@ -11,6 +11,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FormsModule } from '@angular/forms';
 import { ComicAllComponent } from './comic-all/comic-all.component';
 import { CharacterAllComponent } from './character-all/character-all.component';
+import { APIComponent } from './api/api.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CharacterAllComponent } from './character-all/character-all.component';
     NavBarComponent,
     ComicAllComponent,
     CharacterAllComponent,
+    APIComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +31,7 @@ import { CharacterAllComponent } from './character-all/character-all.component';
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'characters', component: CharacterAllComponent },
+      { path: 'api', component: APIComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: "**", component: HomeComponent }
     ], { useHash: true }),
