@@ -17,7 +17,7 @@ namespace API.Controllers.Model
                 {
                     Title = "Iron Man",
                     Release = 2008,
-                    Director = null,
+                    DirectorID = 0,
                     Score = 7.9
                 };
                 ctx.Movies.Add(movie);

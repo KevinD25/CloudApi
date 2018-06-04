@@ -9,26 +9,79 @@
         <div class="card text-center">
           <div class="card-header">
             <h4 class="card-title">
-              <strong>ADD MOVIE</strong>
+              <strong>Customization</strong>
             </h4>
           </div>
 
           <div class="card-block">
-              <div class="row">
-                      <div class="col-3">
-                          <a type="button" (click)="btnSetAdd()">ADD</a>
-                      </div>
-                      <div class="col-4">
-                          <a type="button" (click)="btnSetRM()">REMOVE</a>
-                      </div>
-                      <div class="col-4">
-                              <a type="button"  (click)="btnSetCH()">CHANGE</a>
-                          </div>
+            <div class="row">
+              <div class="col-3">
+                <a type="button" (click)="btnSetAdd()">ADD</a>
               </div>
-
-
-
+              <div class="col-4">
+                <a type="button" (click)="btnSetRM()">REMOVE</a>
               </div>
+              <div class="col-4">
+                <a type="button" (click)="btnSetCH()">CHANGE</a>
+              </div>
+            </div>
+
+            <div class="card-text">
+              <table class="table table-striped">
+                <tbody>
+                  <div *ngIf="mode == 0; else elseState">
+                    <tr>
+                      <th>Title:</th>
+                      <th>
+                        <input type="text" class="form-control" [(ngModel)]="newMovie.title">
+                      </th>
+                    </tr>
+                  </div>
+
+                  <ng-template #elseState>
+                    <tr>
+                      <th>Title:</th>
+                      <th>
+                        <select class="form-control" [(ngModel)]="SetMovie">
+                          <option *ngFor="let m of movies" value="{{m.id}}">{{m.title}}</option>
+                        </select>
+                      </th>
+                    </tr>
+                  </ng-template>
+
+                  <tr>
+                    <th>Release:</th>
+                    <th>
+                      <input type="number" min="1960" max="2030" class="form-control" [(ngModel)]="newMovie.releaseYear">
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th>Director:</th>
+                    <th>
+                      <input type="text" class="form-control" [(ngModel)]="newMovie.director">
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th>Score:</th>
+                    <th>
+                      <input type="number" min="0" max="10" step ="0.1" class="form-control" [(ngModel)]="newMovie.imdbScore">
+                    </th>
+                  </tr>
+
+                </tbody>
+
+              </table>
+              <div class="text-center">
+                <button mdbWavesEffect (click)="btnClick()">Confirm</button>
+              </div>
+              <br>
+            </div>
+
+
+
+          </div>
         </div>
 
       </div>
@@ -41,15 +94,17 @@
           <div class="card-block">
             <table class="col-md-12">
               <thead>
-                <th style="padding-left: 5px">Image</th>
-                <th>ID</th>
-                <th>Name</th>
+                <th style="padding-left: 5px">ID</th>
+                <th>Title</th>
+                <th>Release</th>
+                <th>Director</th>
+                <th>Score</th>
               </thead>
               <tbody *ngIf="list">
                 <tr *ngFor="let character of list" (click)="pressCharacter(character)">
                   <td style="padding-left: 5px">
-                    <img class="img-fluid" src="{{character.thumbnail.path}}/landscape_small.{{character.thumbnail.extension}}"
-                      alt="Card image cap" style="width:70%; max-height: 90px">
+                    <img class="img-fluid" src="{{character.thumbnail.path}}/landscape_small.{{character.thumbnail.extension}}" alt="Card image cap"
+                      style="width:70%; max-height: 90px">
                   </td>
                   <td>{{character.id}}</td>
                   <td>{{character.name}}</td>
