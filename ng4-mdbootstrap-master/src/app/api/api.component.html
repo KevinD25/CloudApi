@@ -33,7 +33,7 @@
                     <tr>
                       <th>Title:</th>
                       <th>
-                        <input type="text" class="form-control" [(ngModel)]="newMovie.title">
+                        <input type="text" class="form-control" [(ngModel)]="movie.title">
                       </th>
                     </tr>
                   </div>
@@ -42,8 +42,8 @@
                     <tr>
                       <th>Title:</th>
                       <th>
-                        <select class="form-control" [(ngModel)]="SetMovie">
-                          <option *ngFor="let m of movies" value="{{m.id}}">{{m.title}}</option>
+                        <select class="form-control">
+                          <option *ngFor="let movie of movies" value="{{m.id}}">{{movie.title}}</option>
                         </select>
                       </th>
                     </tr>
@@ -52,21 +52,21 @@
                   <tr>
                     <th>Release:</th>
                     <th>
-                      <input type="number" min="1960" max="2030" class="form-control" [(ngModel)]="newMovie.releaseYear">
+                      <input type="number" min="1960" max="2030" class="form-control" [(ngModel)]="movie.release">
                     </th>
                   </tr>
 
                   <tr>
                     <th>Director:</th>
                     <th>
-                      <input type="text" class="form-control" [(ngModel)]="newMovie.director">
+                      <input type="text" class="form-control" [(ngModel)]="movie.director">
                     </th>
                   </tr>
 
                   <tr>
                     <th>Score:</th>
                     <th>
-                      <input type="number" min="0" max="10" step ="0.1" class="form-control" [(ngModel)]="newMovie.imdbScore">
+                      <input type="number" min="0" max="10" step ="0.1" class="form-control" [(ngModel)]="movie.score">
                     </th>
                   </tr>
 
@@ -74,13 +74,10 @@
 
               </table>
               <div class="text-center">
-                <button mdbWavesEffect (click)="btnClick()">Confirm</button>
+                <button (click)="btnClick()">Confirm</button>
               </div>
               <br>
             </div>
-
-
-
           </div>
         </div>
 
@@ -101,13 +98,12 @@
                 <th>Score</th>
               </thead>
               <tbody *ngIf="list">
-                <tr *ngFor="let character of list" (click)="pressCharacter(character)">
-                  <td style="padding-left: 5px">
-                    <img class="img-fluid" src="{{character.thumbnail.path}}/landscape_small.{{character.thumbnail.extension}}" alt="Card image cap"
-                      style="width:70%; max-height: 90px">
-                  </td>
-                  <td>{{character.id}}</td>
-                  <td>{{character.name}}</td>
+                <tr *ngFor="let movie of movies">             
+                  <td>{{movie.id}}</td>
+                  <td>{{movie.title}}</td>
+                  <td>{{movie.release}}</td>
+                  <td>{{movie.director}}</td>
+                  <td>{{movie.score}}</td>
                 </tr>
               </tbody>
             </table>
